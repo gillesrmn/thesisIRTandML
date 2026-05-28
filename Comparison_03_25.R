@@ -35,18 +35,24 @@ test_03$EI_long <- rowMeans(test_03[, c("EI2", "EI3", "EI6", "EI7", "EI8", "EI9"
                                         "EI18", "EI19", "EI20", "EI21", "EI22", "EI23", 
                                         "EI24", "EI25", "EI27", "EI29", "EI30", "EI31", "EI32")])
 
-big5_vars_pc <- test_03 %>%
-  select(starts_with("PC")) %>%
-  names()
+# REPLACE with:
+test_03 <- test_03 %>%
+  mutate(
+    PC15_r = 6 - PC15,
+    PC30_r = 6 - PC30,
+    PC45_r = 6 - PC45,
+    PC55_r = 6 - PC55,
+    PN1_r  = 6 - PN1
+  )
 
-big5_vars_pn <- test_03 %>%
-  select(starts_with("PN")) %>%
-  names()
+pc_items_corrected <- c("PC5","PC10","PC15_r","PC20","PC25","PC30_r",
+                        "PC35","PC40","PC45_r","PC50","PC55_r","PC60")
+test_03$PC_score <- rowMeans(test_03[, pc_items_corrected])
 
-test_03$PC_score <- rowMeans(test_03[, big5_vars_pc])
-big5_vars_pc <- "PC_score"
-test_03$PN_score <- rowMeans(test_03[, big5_vars_pn])
-big5_vars_pn <- "PN_score"
+pn_items_corrected <- c("PN1_r","PN6","PN11","PN16","PN21","PN26",
+                        "PN31","PN36","PN41","PN46","PN51","PN56")
+test_03$PN_score_raw <- rowMeans(test_03[, pn_items_corrected])
+test_03$PN_score <- 6 - test_03$PN_score_raw  # flip to Emotional Stability
 
 big5_vars <- c("PC_score", "PN_score")
 
