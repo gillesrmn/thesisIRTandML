@@ -292,7 +292,12 @@ fit_indices <- data.frame(
   williams_p_PN = c(NA, williams_irt["PN_score"], 
                     williams_rf["PN_score"],
                     williams_cit["PN_score"], 
-                    williams_ga["PN_score"])
+                    williams_ga["PN_score"]),
+  mean_williams_p = c(NA,
+                      mean(c(williams_irt["PC_score"], williams_irt["PN_score"])),
+                      mean(c(williams_rf["PC_score"],  williams_rf["PN_score"])),
+                      mean(c(williams_cit["PC_score"], williams_cit["PN_score"])),
+                      mean(c(williams_ga["PC_score"],  williams_ga["PN_score"])))
 )
 
 result_table <- round(fit_indices[, -1], 3)
