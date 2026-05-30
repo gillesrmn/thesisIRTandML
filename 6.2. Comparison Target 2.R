@@ -24,7 +24,7 @@ items_cit <- items_long %>%
                 EI20)
 
 items_ga <- items_long %>%
-  dplyr::select(EI12, EI17, EI20, EI22, EI27, EI31)
+  dplyr::select(EI12, EI14, EI20, EI22, EI23, EI31)
 
 # Build test_03 with EI items + PC items + scores
 test_03 <- items_long %>%
